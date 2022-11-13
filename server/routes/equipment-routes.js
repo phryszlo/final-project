@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Equipment = require('../models/equipment-model.js');
+const Models = require('../models/model-model.js');
 
 router.get('/', async (req, res) => {
   try {
@@ -34,6 +35,16 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/xl-import', async (req, res) => {
+  try {
+    console.log(`body: ${JSON.stringify(req.body)}`);
+    const result = await Equipment.insertMany(req.body.body)
+    console.log(`result: ${JSON.stringify(result)}`);
+    res.json({ result: result });
+  } catch (error) {
+    console.log(`equipment post error: ${error}`);
+  }
+});
 router.patch('/:id', async (req, res) => {
   try {
     const something = await Equipment.findByIdAndUpdate(

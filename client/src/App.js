@@ -11,6 +11,7 @@ import Main from './components/Main';
 import NavBar from './components/NavBar';
 import NASA from './components/NASA';
 import { getUser } from './utilities/users-service'
+import XL from './components/XL';
 
 
 
@@ -44,20 +45,26 @@ function App() {
   }, [user])
 
   return (
-    <MediaContextProvider>
+    // <MediaContextProvider>
       <div className="App">
         {user
           ?
           (
-            <div>
-              <NavBar leftItems={leftItems} rightItems={rightItems} Media={Media} />
-              <Routes>
-                <Route path='/' element={<Success />} />
-                <Route path='/success' element={<Success />} />
-                <Route path='/main' element={<Main />} />
-                <Route path='/nasa' element={<NASA />} />
-              </Routes>
-            </div>
+            <>
+              <div className="nav-div">
+                <NavBar leftItems={leftItems} rightItems={rightItems} Media={Media} />
+              </div>
+              <h1>what the fuck?</h1>
+              <div className="content-div">
+                <Routes>
+                  <Route path='/' element={<Success />} />
+                  <Route path='/success' element={<Success />} />
+                  <Route path='/main' element={<Main />} />
+                  <Route path='/nasa' element={<NASA />} />
+                  <Route path='/xl' element={<XL />} />
+                </Routes>
+              </div>
+            </>
           )
           :
           (
@@ -68,7 +75,7 @@ function App() {
           )
         }
       </div>
-    </MediaContextProvider>
+    // </MediaContextProvider>
   );
 }
 

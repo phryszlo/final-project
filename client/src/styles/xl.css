@@ -1,0 +1,31 @@
+.xl-json-code {
+  display: flex;
+  width: 80vw;
+  height: 50vh;
+  overflow-y: auto;
+  margin: 0;
+  
+  margin-top: 10em;
+  font-size: 8px;
+  line-height: 9px;
+}
+.xl-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  width: 90vw;
+  border: solid orange;
+  padding: 1em !important;
+}
+.xl-form {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 1em !important;
+  margin: 0 !important;
+}
+.xl-btn {
+  padding: .6em !important;
+  margin: 5px !important;
+}

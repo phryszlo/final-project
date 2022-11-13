@@ -6,7 +6,11 @@
   padding: 0 !important;
   border: .2px solid orange !important;
   margin: 0;
-
+}
+.my-nav-bar {
+  top: 0;
+  left: 0;
+  /* display: inline-block !important; */
 }
 .nav-logo {
   width: 40px !important;

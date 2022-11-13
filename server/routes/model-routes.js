@@ -22,6 +22,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/xl-import', async (req, res) => {
+  try {
+    console.log(`body: ${JSON.stringify(req.body.body)}`);
+    const result = await Models.insertMany(req.body.body);
+    console.log(`result: ${JSON.stringify(result)}`);
+    res.json({ result: result });
+  } catch (error) {
+    console.log(`equipment post error: ${error}`);
+  }
+});
+
 router.patch('/:id', async (req, res) => {
   try {
     const something = await Models.findByIdAndUpdate(

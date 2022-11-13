@@ -15,7 +15,7 @@ function NavBar({ leftItems, rightItems }) {
   const navigate = useNavigate();
 
   return (
-    <Menu className="nav-bar" fixed="top" inverted>
+    <Menu className="my-nav-bar" fixed="top" inverted>
       <Menu.Item>
         <Image className="nav-logo" bordered circular src={hester} />
       </Menu.Item>
@@ -26,6 +26,7 @@ function NavBar({ leftItems, rightItems }) {
 
       <Menu.Item as="a" content="Home" key="home-link" onClick={() => navigate('/main')} />
       <Menu.Item as="a" content="NASA" key="nasa-link" onClick={() => navigate('/nasa')} />
+      <Menu.Item as="a" content="XL" key="xl-link" onClick={() => navigate('/xl')} />
 
       <Menu.Menu position="right">
         {rightItems.map((item) => (

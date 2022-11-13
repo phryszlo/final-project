@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const locationSchema = Schema({
-  region: {
+  building: {
     type: String,
     required: [true, "region is a required field"],
     enum: ["Central","East Tower", "West Tower"]
@@ -13,7 +13,8 @@ const locationSchema = Schema({
   },
   location_type: {
     type: String,
-    required: [true, "location type is a required field"]
+    // required: [true, "location type is a required field"]
+    required: false,
   }
 },
   {

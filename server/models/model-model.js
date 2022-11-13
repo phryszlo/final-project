@@ -2,18 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const modelSchema = Schema({
-  type: {
+  eq_type: {
     type: String,
-    required: [true, "type is a required field"],
-    unique: true
+    required: [true, "eq_type is a required field"],
   },
   make: {
     type: String,
     required: [true, "make is a required field"]
   },
+  model_name: {
+    type: String,
+    required: false,
+  },
   model_number: {
     type: String,
-    required: [true, "model# is a required field"]
+    required: false,
   }
 },
   {

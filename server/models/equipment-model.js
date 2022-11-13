@@ -4,7 +4,20 @@ const Schema = mongoose.Schema;
 const equipmentSchema = Schema({
   serial_number: {
     type: String,
-    required: [true, "serial_number is a required field"],
+    // required: [true, "serial_number is a required field"],
+    required: false,
+  },
+  id_tag: {
+    type: String,
+    required: false,
+  },
+  status: {
+    type: String,
+    enum: ["Active","Out for repair","Inactive","Lost"],
+  },
+  notes: {
+    type: String,
+    required: false,
   },
   model_id: {
     type: Schema.Types.ObjectId,

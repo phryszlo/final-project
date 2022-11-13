@@ -36,12 +36,18 @@ code {
 
 .App {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #212121;
   color: whitesmoke;
-  flex-direction: column;
+  border: solid #900f19;
+}
+
+.nav-div {
+  display: block;
+  /* min-height: 1em; */
 }
 
 .success {
