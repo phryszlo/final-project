@@ -1,0 +1,30 @@
+* {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.menu {
+  padding: 0 !important;
+  border: .2px solid orange !important;
+  margin: 0;
+
+}
+.nav-logo {
+  width: 40px !important;
+  margin: 0;
+
+}
+a.item {
+  padding: .5em !important;
+  height: 100% !important;
+}
+div.item {
+  padding: .5em !important;
+  height: 100% !important;
+}
+div.ui {
+  /* height: fit-content !important; */
+  /* padding: 11em !important; */
+  height: 60px !important;
+  display: flex;
+  align-items: center;
+}

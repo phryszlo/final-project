@@ -1,0 +1,147 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+@font-face {
+  font-family: "Lato-Regular";
+  src: url("./Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Lato-Bold";
+  src: url("./Lato-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Burtons";
+  src: url("./Burtons.otf");
+}
+
+
+body {
+  margin: 0;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #212121;
+  color: whitesmoke;
+  flex-direction: column;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.continue-btn {
+  padding: .6em 2em !important;
+  margin-top: 1em !important;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* width: 90vw; */
+  height: 100vh;
+  background-color: #212121;
+  color: whitesmoke;
+  /* border: solid lime; */
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+  background-color: rgba(245, 245, 244, 255);
+  border-radius: 4%;
+  height: 70vh;
+  width: 60vw;
+
+  color: #212121;
+  /* border: solid deeppink; */
+}
+
+
+@media screen and (max-width: 1200px) {
+  .form {
+    height: 100vh;
+    width: 80vw;
+  }
+}
+
+.form-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1em;
+  /* border: solid orange; */
+}
+
+/* object-cover h-full object-left-top rounded-lg */
+.form-img-wrap {
+  /* display: flex; */
+  /* justify-content: flex-end; */
+  /* align-items: center; */
+  position: relative;
+  max-height: 100%;
+  width: 100%;
+  /* border: solid skyblue; */
+}
+
+.form-img-wrap img {
+  object-fit: cover;
+  object-position: left top;
+  height: 100%;
+  width: 100%;
+  border-radius: 4%;
+  /* border: solid yellow; */
+}
+
+.button-field {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-btn {
+  background-color: rgb(45, 212, 191) !important;
+}
+
+.text-red-500 {
+  color: rgb(220, 38, 38) !important;
+}
+
+.form input,
+.form select {
+  /* height: 1.6em !important; */
+  padding: .5em !important;
+}
+
+.check-flex {
+  display: flex;
+}
+.chk {
+  margin-right: .6em;
+}
