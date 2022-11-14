@@ -4,10 +4,11 @@
 }
 .menu {
   padding: 0 !important;
-  border: .2px solid orange !important;
-  margin: 0;
+  /* border-bottom: .2px solid orange !important; */
+
 }
 .my-nav-bar {
+  /* margin: 0 0 15px 0 !important; */
   top: 0;
   left: 0;
   /* display: inline-block !important; */

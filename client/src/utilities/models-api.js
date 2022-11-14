@@ -9,6 +9,17 @@ export async function getModels() {
   return sendRequest(`${BASE_URL}/models`, 'GET');
 }
 
+export async function patchEq(updated) {
+  console.log(`updated: ${JSON.stringify(updated)}`);
+  return;
+  return sendRequest(`${BASE_URL}/equipment`, 'PATCH', updated)
+}
+
+export async function postEq(newEq) {
+  console.log(`newEq: ${JSON.stringify(newEq)}`);
+  // return;
+  return sendRequest(`${BASE_URL}/equipment`, 'POST', newEq)
+}
 
 async function sendRequest(url, method = 'GET', payload = null) {
   console.log(`sendRequest payload: ${JSON.stringify(payload)}`)

@@ -6,29 +6,30 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Card } from 'semantic-ui-react';
 import '../../styles/inventory.css';
-import { getModels } from "../../utilities/models-api";
+import { getModels, patchEq, postEq } from "../../utilities/models-api";
 
 const EquipmentForm = () => {
 
-  const [model, setModel] = useState("");
-  const [eqType, setEqType] = useState("");
-  const [make, setMake] = useState("");
   const [showModelSelect, setShowModelSelect] = useState(false);
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState({});
+  const [isUpdate, setIsUpdate] = useState(true);
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
       serial_number: "",
       id_tag: "",
-      status: "Active",
+      status: "Inactive",
       notes: "",
       location_id: "",
       model_id: "",
       model_name: "",
       make: "",
       eq_type: "",
+      building: "",
+      room: "",
+      location_id: "",
     },
 
     validationSchema: Yup.object({
@@ -40,6 +41,7 @@ const EquipmentForm = () => {
 
     onSubmit: (values) => {
       console.log(values);
+      isUpdate ? patchEq(values) : postEq(values);
       // router.push({ pathname: '/success', query: values })
     },
   })
@@ -67,12 +69,12 @@ const EquipmentForm = () => {
     <main className="h-fit h-min-screen w-screen flex items-center justify-center px-5 border-blue-500 bg-slate-700">
       <form
         onSubmit={formik.handleSubmit}
-        className="!mt-12 equipment-form border-2 bg-stone-100 rounded-xl h-fit w-2/3 p-3 font-latoRegular">
+        className="!mt-14 equipment-form border-2 bg-stone-100 rounded-xl h-fit w-2/3 p-3 font-latoRegular">
         <div className="text-gray-700 p-20 self-center flex flex-col items-center justify-center w-5/6">
           <h1 className="text-3xl pb-2 font-burtons w-full text-center">
             equipment item
           </h1>
-          <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border-2 !border-emerald-300">
+          <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border !border-emerald-300">
             <button
               type="button"
               className="bg-teal-500 rounded-xl mr-8 hover:bg-red-400 active:bg-green-300"
@@ -80,13 +82,13 @@ const EquipmentForm = () => {
               {showModelSelect ? 'close model select' : 'choose model'}
             </button>
             <div className="flex flex-col items-center w-full">
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border px-5 mb-2 border-slate-900 h-8">
+              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
                 {formik.values.eq_type}
               </span>
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border px-5 mb-2 border-slate-900 h-8">
+              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
                 {formik.values.make}
               </span>
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border px-5 mb-2 border-slate-900 h-8">
+              <span className="model-span block w-4/5 !h-fit text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900">
                 {formik.values.model_name}
               </span>
             </div>
@@ -112,12 +114,12 @@ const EquipmentForm = () => {
                         className="rounded-md w-fit h-fit !px-2 bg-orange-400"
                         onClick={(e) => {
                           e.preventDefault();
-                          console.log(`m = ${m.id}`)
+                          console.log(`m = ${m.id}, ${m.model_name}`)
                           setSelectedModel(m)
-                          // formik.values.eq_type = m.eq_type && m.eq_type;
-                          // formik.values.model_id = m.id;
-                          // formik.values.make = m.make && m.make;
-                          // formik.values.model_name = m.model_name && m.model_name;
+                          formik.values.eq_type = m.eq_type && m.eq_type;
+                          formik.values.model_id = m.id;
+                          formik.values.make = m.make && m.make;
+                          formik.values.model_name = m.model_name && m.model_name;
                         }}>
                         {' >> '}
                       </button>
@@ -135,7 +137,7 @@ const EquipmentForm = () => {
             name="model_id"
             className="!w-full text-center"
             value={formik.values.model_id} />
-          <div className="mt-6 w-full border border-red-600">
+          <div className="mt-6 w-full">
 
             <div className="pb-4">
               <label
@@ -163,7 +165,7 @@ const EquipmentForm = () => {
                   : ''}`}>
                 {formik.touched.id_tag && formik.errors.id_tag
                   ? formik.errors.id_tag
-                  : "email"}
+                  : "id_tag"}
               </label>
               <input
                 className="bg-stone-50 border-2 border-gray-500 px-2 py-1 rounded-md w-full focus:border-orange-500 focus:ring-orange-500"
@@ -180,7 +182,6 @@ const EquipmentForm = () => {
               <select
                 className="bg-stone-50 border-2 red border-gray-500 p-1.5 rounded-md w-full focus:border-teal-500 focus:ring-teal-500"
                 name="status"
-                defaultValue="Out of service"
                 value={formik.values.status}
                 onChange={formik.handleChange}
               >
@@ -210,7 +211,18 @@ const EquipmentForm = () => {
                 onBlur={formik.handleBlur} />
             </div>
 
-            <button type="submit" className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-lg w-full">Update</button>
+            <button
+              onClick={() => setIsUpdate(false)}
+              type="submit"
+              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-lg w-full">
+              Insert
+            </button>
+            <button
+              onClick={() => setIsUpdate(true)}
+              type="submit"
+              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-lg w-full">
+              Update
+            </button>
           </div>
         </div>
 
