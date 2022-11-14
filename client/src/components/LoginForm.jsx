@@ -5,9 +5,11 @@ import { motion as m } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 import { logIn } from '../utilities/users-service'
+
+const { REACT_APP_API_URL } = process.env;
 
 export default function LoginForm({ setUser }) {
 

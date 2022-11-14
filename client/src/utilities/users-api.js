@@ -1,5 +1,7 @@
 import { getToken } from './users-service';
-const BASE_URL = "/api/v1/users";
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? process.env.REACT_APP_API_URL
+  : "/api/v1/users";
 
 export async function signUp(userData) {
   return sendRequest(BASE_URL, 'POST', userData);
@@ -30,7 +32,7 @@ async function sendRequest(url, method = 'GET', payload = null) {
     // Prefacing with 'Bearer' is recommended in the HTTP specification
     options.headers.Authorization = `Bearer ${token}`;
   }
-  
+
   //☣️☣️ this is a terrible clg. it will send the clear pwd to the browser console.
   // console.log(`api sendRequest:  token: ${token} url: ${url} options: ${JSON.stringify(options)}`);
 
