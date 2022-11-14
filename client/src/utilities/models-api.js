@@ -1,19 +1,9 @@
 import { getToken } from './users-service';
 const BASE_URL = process.env.NODE_ENV === 'production'
   ? process.env.REACT_APP_API_URL
-  : "/api/v1/users";
+  : "/api/v1";
 
-export async function signUp(userData) {
-  return sendRequest(BASE_URL, 'POST', userData);
-}
 
-export async function getUsers() {
-  return sendRequest(BASE_URL);
-}
-
-export async function logIn(credentials) {
-  return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
-}
 
 export async function getModels() {
   return sendRequest(`${BASE_URL}/models`, 'GET');

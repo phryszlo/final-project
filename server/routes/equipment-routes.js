@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Equipment = require('../models/equipment-model.js');
 const Models = require('../models/model-model.js');
+const Locations = require('../models/location-model');
 
 router.get('/', async (req, res) => {
   try {
@@ -15,7 +16,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const theEquipment = await Equipment.findById({_id: req.params.id}, "-__v -createdAt -updatedAt")
+    const theEquipment = await Equipment.findById({ _id: req.params.id }, "-__v -createdAt -updatedAt")
       .populate('model_id')
       .populate('location_id');
     console.log(`${theEquipment.length} equipment returned. 📬`);
@@ -38,13 +39,30 @@ router.post('/', async (req, res) => {
 router.post('/xl-import', async (req, res) => {
   try {
     console.log(`body: ${JSON.stringify(req.body)}`);
-    const result = await Equipment.insertMany(req.body.body)
+    // const result = await Equipment.insertMany(req.body.body)
+
+    const arr = req.body.body;
+    let result;
+    arr.forEach(async (item) => {
+      console.log(`item: ${JSON.stringify(item)}`);
+      result = await Locations.find({ "building": item.building, "room": item.room })
+        .select("_id");
+      console.log(`::the id is:: ${JSON.stringify(result[0].id)}`);
+
+      let {building, room, ...newEq} = item;
+      newEq.location_id = result[0].id;
+      console.log(`newEq: ${JSON.stringify(newEq)}`);
+      result = await Equipment.create(newEq);
+      console.log(`the result was: ${JSON.stringify(result)}`);
+    })
+
     console.log(`result: ${JSON.stringify(result)}`);
-    res.json({ result: result });
+    res.json({ result: "eq inserts maybe worked. no errors thrown." });
   } catch (error) {
     console.log(`equipment post error: ${error}`);
   }
 });
+
 router.patch('/:id', async (req, res) => {
   try {
     const something = await Equipment.findByIdAndUpdate(

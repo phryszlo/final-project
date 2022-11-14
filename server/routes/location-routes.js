@@ -22,6 +22,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.post('/xl-import', async (req, res) => {
+  try {
+    console.log(`body: ${JSON.stringify(req.body)}`);
+    const result = await Locations.insertMany(req.body.body)
+    console.log(`result: ${JSON.stringify(result)}`);
+    res.json({ result: result });
+  } catch (error) {
+    console.log(`locations post error: ${error}`);
+  }
+});
+
 router.patch('/:id', async (req, res) => {
   try {
     const something = await Locations.findByIdAndUpdate(

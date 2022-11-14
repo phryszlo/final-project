@@ -101,3 +101,4 @@ export const getUsers = async () => {
   const users = await usersAPI.getUsers()
   return users;
 }
+

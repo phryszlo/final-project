@@ -45,6 +45,10 @@ code {
   border: solid #900f19;
 }
 
+.content-div {
+  /* border: solid salmon; */
+}
+
 .nav-div {
   display: block;
   /* min-height: 1em; */

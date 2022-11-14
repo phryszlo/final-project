@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import NASA from './components/NASA';
 import { getUser } from './utilities/users-service'
 import XL from './components/XL';
+import EquipmentForm from './components/inventory/Equipment';
 
 
 
@@ -62,6 +63,7 @@ function App() {
                   <Route path='/main' element={<Main />} />
                   <Route path='/nasa' element={<NASA />} />
                   <Route path='/xl' element={<XL />} />
+                  <Route path='/equipment' element={<EquipmentForm />} />
                 </Routes>
               </div>
             </>

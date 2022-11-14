@@ -5,7 +5,7 @@ const locationSchema = Schema({
   building: {
     type: String,
     required: [true, "region is a required field"],
-    enum: ["Central","East Tower", "West Tower"]
+    // enum: ["Central","East Tower", "West Tower", "Digital Futures"]
   },
   room: {
     type: String,

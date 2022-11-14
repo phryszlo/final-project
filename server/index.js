@@ -19,7 +19,13 @@ const app = express();
 
 const PORT = process.env.PORT || 7952;
 
-app.use(cors());
+// app.use(cors({
+//   origin: [
+//     "http://74.215.63.91:3000",
+//     "http://localhost:3000",
+//     "http://0.0.0.0:3000"
+//   ]
+// }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
@@ -32,7 +38,6 @@ app.use('/api/v1/models', modelRouter);
 app.use('/api/v1/equipment', equipmentRouter);
 app.use('/api/v1/locations', locationRouter);
 
-console.log('atlasuri:', process.env.ATLAS_URI);
 
 mongoose.connect(process.env.ATLAS_URI, {
   useNewUrlParser: true,

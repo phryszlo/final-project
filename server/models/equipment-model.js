@@ -13,7 +13,7 @@ const equipmentSchema = Schema({
   },
   status: {
     type: String,
-    enum: ["Active","Out for repair","Inactive","Lost"],
+    enum: ["Active","Inactive","Out of service", "Lost", "In use", "Dan took it"],
   },
   notes: {
     type: String,

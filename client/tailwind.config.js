@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        latoRegular: "Lato-Regular",
-        latoBold: "Lato-Bold",
+        // latoRegular: "Lato-Regular",
+        // latoBold: "Lato-Bold",
         burtons: "Burtons",
       },
     },

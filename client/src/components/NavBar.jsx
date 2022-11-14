@@ -27,6 +27,7 @@ function NavBar({ leftItems, rightItems }) {
       <Menu.Item as="a" content="Home" key="home-link" onClick={() => navigate('/main')} />
       <Menu.Item as="a" content="NASA" key="nasa-link" onClick={() => navigate('/nasa')} />
       <Menu.Item as="a" content="XL" key="xl-link" onClick={() => navigate('/xl')} />
+      <Menu.Item as="a" content="equipment" key="xl-link" onClick={() => navigate('/equipment')} />
 
       <Menu.Menu position="right">
         {rightItems.map((item) => (
