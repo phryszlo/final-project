@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 main {
-  height: fit-content !important;
+  min-height: 100vh !important;
 }
 
 .equipment-form {

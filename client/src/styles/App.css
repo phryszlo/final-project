@@ -34,6 +34,36 @@ code {
     monospace;
 }
 
+.marquee-div {
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  top: 4em;
+  left: 0;
+  width: 100vw;
+  height: 2.2em;
+}
+.marquee {
+  width: 100vw;
+}
+.marquee:hover{
+  animation-play-state: paused;
+}
+
+/* The animation */
+@keyframes marquee{
+  0%{transform: translateX(100%);}
+  100%{transform: translateX(-40%);}
+}
+
+/* media query to enable animation for only those who want it */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee{
+      animation: marquee 4s linear infinite;
+      margin: 0 !important;
+  }
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -47,6 +77,8 @@ code {
 
 .content-div {
   /* border: solid salmon; */
+  height: 100vh;
+
 }
 
 .nav-div {

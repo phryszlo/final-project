@@ -2,11 +2,19 @@ import React from 'react'
 
 function Main() {
   return (
-    <div>Main</div>
+    <div className="w-full h-1/2 text-amber-300">
+      {`Welcome to the final project app.
+        ` }
+        <div className="m-4 text-lime-500">
+          {`I think this page is only here so there would be more navbar items.`}
+        </div>
+    </div>
   )
 }
 
 export default Main
+
+
 
 /*
 {

@@ -1,9 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from "framer-motion";
+// import { AnimatePresence } from "framer-motion";
 import { useState, useEffect } from 'react';
 import { createMedia } from "@artsy/fresnel";
 
-import AuthForm from './components/AuthForm';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import Success from './components/Success';
@@ -13,6 +12,7 @@ import NASA from './components/NASA';
 import { getUser } from './utilities/users-service'
 import XL from './components/XL';
 import EquipmentForm from './components/inventory/Equipment';
+import EqTable from './components/inventory/EqTable';
 
 
 
@@ -37,8 +37,8 @@ function App() {
     { as: "a", content: "Users", key: "users" }
   ];
   const rightItems = [
-    { as: "a", content: "Login", key: "login" },
-    { as: "a", content: "Register", key: "register" }
+    { as: "a", content: "Logout", key: "logout" },
+    { as: "span", content: `user:  ${user && user.name}`, key: "user" }
   ];
 
   useEffect(() => {
@@ -47,36 +47,40 @@ function App() {
 
   return (
     // <MediaContextProvider>
-      <div className="App">
-        {user
-          ?
-          (
-            <>
-              <div className="nav-div">
-                <NavBar leftItems={leftItems} rightItems={rightItems} Media={Media} />
-              </div>
-              <h1>what the fuck?</h1>
-              <div className="content-div">
-                <Routes>
-                  <Route path='/' element={<Success />} />
-                  <Route path='/success' element={<Success />} />
-                  <Route path='/main' element={<Main />} />
-                  <Route path='/nasa' element={<NASA />} />
-                  <Route path='/xl' element={<XL />} />
-                  <Route path='/equipment' element={<EquipmentForm />} />
-                </Routes>
-              </div>
-            </>
-          )
-          :
-          (
-            <Routes>
-              <Route path='/signup' element={<SignupForm setUser={setUser} />} />
-              <Route path='/' element={<LoginForm setUser={setUser} />} />
-            </Routes>
-          )
-        }
-      </div>
+    <div className="App">
+      {user
+        ?
+        (
+          <div className="!flex !flex-col">
+            <div className="nav-div">
+              <NavBar username={user.name} setUser={setUser} rightItems={rightItems} Media={Media} />
+            </div>
+            <div className="marquee-div !bg-orange-500 !m-0">
+              <p className="marquee text-indigo-900 font-burtons !mb-1">the final project app</p>
+            </div>
+            <div className="content-div !mt-12">
+              <Routes>
+                <Route path='/' element={<Success />} />
+                <Route path='/success' element={<Success />} />
+                <Route path='/main' element={<Main />} />
+                <Route path='/nasa' element={<NASA />} />
+                <Route path='/xl' element={<XL />} />
+                <Route path='/equipment' element={<EquipmentForm />} />
+                <Route path='/equipment/:id' element={<EquipmentForm />} />
+                <Route path='/equipment/all' element={<EqTable />} />
+              </Routes>
+            </div>
+          </div>
+        )
+        :
+        (
+          <Routes>
+            <Route path='/signup' element={<SignupForm setUser={setUser} />} />
+            <Route path='/' element={<LoginForm setUser={setUser} />} />
+          </Routes>
+        )
+      }
+    </div>
     // </MediaContextProvider>
   );
 }

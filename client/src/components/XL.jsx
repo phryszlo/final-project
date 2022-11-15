@@ -94,7 +94,8 @@ function XL() {
       data.forEach((item) => {
         // eq_type, make, model_name
         const { eq_type, make, model_name, ...rest } = item;
-        eqData.push(rest);
+        // eqData.push(rest);
+        eqData.push(item);
       });
 
       const result = await axios.post('/api/v1/equipment/xl-import', {
@@ -130,6 +131,21 @@ function XL() {
 
   return (
     <div className="xl-component">
+      <div className="w-4/5 h-fit p-3 text-justify">
+        <article>
+          {`This component is designed to import an Excel (i.e. .xlsx) file
+            and give the options to import location, model, and equipment
+            data separately. This is for admin use only, but it has been left 
+            accessible in order to demonstrate that it was done as part of This
+            project. It is necessary to import models and locations before equipment.
+            If not, the imported equipment will not receive the associated 
+            model and location ids, due to their not existing yet.
+            The file load should still work, and does not hit the server/database. 
+            It will just display the excel file as JSON in the box below. 
+            This has only been tested on a file with one worksheet and only one table,
+            so results may vary.`}
+        </article>
+      </div>
       <form className="xl-form">
         <Form.Field>
           <label htmlFor="upload">Upload File</label>
