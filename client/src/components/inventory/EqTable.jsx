@@ -38,7 +38,7 @@ function EqTable() {
             return (
               <tr key={i}>
                 <td className="border-b border-blue-300 !px-4 !py-1" key={`td0-${i}`}>
-                  <button type="button" onClick={() =>
+                  <button className="!px-2 !py-1 bg-teal-400 rounded-lg text-blue-900" type="button" onClick={() =>
                     navigate(`/equipment/${v.id}`)}>
                       view
                   </button>

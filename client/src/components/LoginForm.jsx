@@ -2,7 +2,6 @@ import formImage from "../images/hester.jpg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion as m } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button, Checkbox, Form } from 'semantic-ui-react';
@@ -56,7 +55,7 @@ export default function LoginForm({ setUser }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 2 }}
+      transition={{ duration: 1 }}
       className="login-form-outer">
       <main className="main login-main">
         <Form onSubmit={formik.handleSubmit} className="form login-form">
@@ -107,7 +106,15 @@ export default function LoginForm({ setUser }) {
 
               <p className="error-message text-red-600" onChange={() => this.logMsg(error)} >{error}</p>
               <Form.Field className="button-field">
-                <Button type="submit" className="submit-btn">Log on</Button>
+                <Button type="submit" className="submit-btn !p-2 !mt-2">Log on</Button>
+              </Form.Field>
+              <Form.Field className="button-field login-signup-toggle justify-self-center place-self-center">
+                <button
+                  type="button"
+                  className="login-signup-toggle-btn submit-btn !bg-green-300 !p-2 !mt-2 rounded-lg"
+                  onClick={() => navigate('/signup')}>
+                  New user? Sign up here
+                </button>
               </Form.Field>
             </div>
           </div>

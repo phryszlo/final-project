@@ -9,6 +9,10 @@ export async function getModels() {
   return sendRequest(`${BASE_URL}/models`, 'GET');
 }
 
+export async function getLocations() {
+  return sendRequest(`${BASE_URL}/locations`, 'GET');
+}
+
 export async function getEq(id) {
   console.log(`getEq: id = ${id}`)
   const thing =  sendRequest(`${BASE_URL}/equipment/${id}`, 'GET');

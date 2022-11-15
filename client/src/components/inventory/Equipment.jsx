@@ -1,19 +1,19 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { motion as m } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Card } from 'semantic-ui-react';
 import '../../styles/inventory.css';
-import { getModels, getEq, insertEq, updateEq } from "../../utilities/inventory-service";
+import { getModels, getLocations, getEq, insertEq, updateEq } from "../../utilities/inventory-service";
 
 const EquipmentForm = () => {
 
   const [showModelSelect, setShowModelSelect] = useState(false);
+  const [showLocationSelect, setShowLocationSelect] = useState(false);
   const [models, setModels] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [currEq, setCurrEq] = useState({});
   const [selectedModel, setSelectedModel] = useState({});
+  const [selectedLocation, setSelectedLocation] = useState({});
   const [isUpdate, setIsUpdate] = useState(true);
   const navigate = useNavigate();
 
@@ -25,13 +25,15 @@ const EquipmentForm = () => {
       const models = await getModels();
       setModels(models.models);
     }
+    const callGetLocations = async () => {
+      const locs = await getLocations();
+      setLocations(locs.locations);
+    }
 
     const callGetEq = async () => {
       const eq = await getEq(paramsId.id);
-      console.log(`eq: ${JSON.stringify(eq)}`);
       setFormikVals(eq);
       setCurrEq(eq);
-      console.log(`sn: ${currEq.serial_number}`);
 
     }
     if (Object.keys(paramsId).length > 0) {
@@ -40,6 +42,7 @@ const EquipmentForm = () => {
     }
 
     callGetModels();
+    callGetLocations();
     console.log(`formik errs: ${JSON.stringify(formik.errors)}`);
 
   }, [])
@@ -60,19 +63,19 @@ const EquipmentForm = () => {
       formik.values.id_tag = eq.id_tag ? eq.id_tag : "";
       formik.values.status = eq.status ? eq.status : "";
       formik.values.notes = eq.notes ? eq.notes : "";
-      formik.values.location_id = eq.location_id ? eq.location_id : "";
+      formik.values.location_id = eq.location_id._id ? eq.location_id._id : "";
       formik.values.model_id = eq.model_id._id ? eq.model_id._id : "";
       formik.values.eq_type = eq.model_id.eq_type ? eq.model_id.eq_type : "";
       formik.values.make = eq.model_id.make ? eq.model_id.make : "";
       formik.values.model_name = eq.model_id.model_name ? eq.model_id.model_name : "";
-      formik.values.building = eq.building ? eq.building : "";
-      formik.values.room = eq.room ? eq.room : "";
+      formik.values.building = eq.location_id.building ? eq.location_id.building : "";
+      formik.values.room = eq.location_id.room ? eq.location_id.room : "";
     }
   }
 
   const formik = useFormik({
 
-    
+
 
     initialValues: {
       id: null,
@@ -107,11 +110,17 @@ const EquipmentForm = () => {
         id_tag: formik.values.id_tag,
         status: formik.values.status,
         notes: formik.values.notes,
-        model_id: formik.values.model_id
+        model_id: formik.values.model_id,
+        location_id: formik.values.location_id
       }
       isUpdate ? updateEq(formik.values.id, eq) : insertEq(eq);
       // router.push({ pathname: '/success', query: values })
     },
+
+    onReset: () => {
+      formik.values = ({ ...formik.initialValues });
+      console.log(`reset was called`);
+    }
   })
 
 
@@ -126,25 +135,40 @@ const EquipmentForm = () => {
     }
   }, [selectedModel])
 
+  useEffect(() => {
+    if (Object.keys(selectedLocation).length > 0) {
+      console.log(`room = ${selectedLocation.room}`)
+      formik.values.building = selectedLocation.building && selectedLocation.building;
+      formik.values.location_id = selectedLocation._id && selectedLocation._id;
+      formik.values.room = selectedLocation.room && selectedLocation.room;
+    }
+  }, [selectedLocation])
+
 
   const clearData = () => {
+    console.log(`clear data.`)
     setCurrEq(new Object());
     formik.resetForm();
-  }  
+    
+    // formik.setValues({ ...formik.initialValues });
+  }
 
-  return ( 
-    <main className="equipment-form-component w-screen flex items-center justify-center px-5 bg-slate-700">
+  return (
+    <main className="equipment-form-component w-screen absolute top-0 left-0 flex items-center justify-center px-5 bg-slate-700">
       <form
         onSubmit={formik.handleSubmit}
-        className="equipment-form border-2 bg-stone-100 rounded-xl h-fit w-2/3 p-3 font-latoRegular">
+        className="equipment-form border-2 bg-stone-100 rounded-md h-fit w-2/3 p-3 font-latoRegular">
         <div className="text-gray-700 p-20 self-center flex flex-col items-center justify-center w-5/6">
           <h1 className="text-3xl pb-2 font-burtons w-full text-center">
             equipment item
           </h1>
+
+          {/* MODELS SECTION */}
+          {/* models 'form' */}
           <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border !border-emerald-300">
             <button
               type="button"
-              className="bg-teal-500 rounded-xl mr-8 hover:bg-red-400 active:bg-green-300"
+              className="bg-teal-500 w-20 rounded-md mr-8 hover:bg-red-400 active:bg-green-300"
               onClick={() => {
                 setShowModelSelect(!showModelSelect);
               }}>
@@ -202,16 +226,83 @@ const EquipmentForm = () => {
               </tbody>
             </table>
           </div>
+
+          {/* LOCATIONS SECTION */}
+          {/* locations 'form' */}
+          <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border !border-emerald-300">
+            <button
+              type="button"
+              className="bg-teal-500 w-20 rounded-md mr-8 hover:bg-red-400 active:bg-green-300"
+              onClick={() => {
+                setShowLocationSelect(!showLocationSelect);
+              }}>
+              {showLocationSelect ? 'close location select' : 'choose location'}
+            </button>
+            <div className="flex flex-col items-center w-full">
+              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
+                {formik.values.building}
+              </span>
+              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
+                {formik.values.room}
+              </span>
+            </div>
+          </div>
+          {/* locations accordion */}
+          <div className={`location-select ${showLocationSelect ? '' : 'hidden'}  border border-blue-700 w-full h-64 overflow-y-auto`}>
+            <table>
+              <thead>
+                <tr>
+                  <th className="border-b-2 text-left"></th>
+                  <th className="border-b-2 text-left">building</th>
+                  <th className="border-b-2 text-left">room</th>
+                </tr>
+              </thead>
+              <tbody>
+                {locations && locations.length > 0 && locations.map((loc, i) => (
+                  <tr className="border-b-2" key={i}>
+                    <td className="!p-2" key={`tdl-btn-${i}`}>
+                      <button
+                        type="button"
+                        className="rounded-md w-fit h-fit !px-2 bg-orange-400"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log(`m = ${loc.id}, ${loc.room}`)
+                          setSelectedLocation(loc)
+                          formik.values.building = loc.building && loc.building;
+                          formik.values.room = loc.room && loc.room;
+                          formik.values.location_id = loc.id && loc.id;
+                          setShowLocationSelect(false);
+                        }}>
+                        {' >> '}
+                      </button>
+                    </td>
+                    <td key={`tdl-0-${i}`}>{loc.building}</td>
+                    <td key={`tdl-1-${i}`}>{loc.room}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* DISPLAY IDS SECTION */}
           <input
+            disabled
             type="text"
             name="model_id"
             className="!w-full text-center"
-            value={formik.values.model_id} />
+            value={`model_id: ${formik.values.model_id}`}  />
           <input
+            disabled
             type="text"
             name="id"
             className="!w-full text-center"
-            value={formik.values.id} />
+            value={`eq_id: ${formik.values.id}`}  />
+          <input
+            disabled
+            type="text"
+            name="location_id"
+            className="!w-full text-center"
+            value={`loc_id: ${formik.values.location_id}`} />
           <div className="mt-6 w-full">
 
             <div className="pb-4">
@@ -294,7 +385,7 @@ const EquipmentForm = () => {
               disabled={Object.keys(formik.errors).length > 0}
               id="insert-btn"
               type="submit"
-              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-lg w-full"
+              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
               onClick={() => setIsUpdate(false)}>
               Insert
             </button>
@@ -302,14 +393,14 @@ const EquipmentForm = () => {
               disabled={Object.keys(formik.errors).length > 0}
               id="update-btn"
               type="submit"
-              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-lg w-full"
+              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
               onClick={() => setIsUpdate(true)}>
               Update
             </button>
             <button
               id="clear-btn"
               type="button"
-              className="bg-orange-500 font-latoBold text-sm text-white py-3 mt-6 rounded-lg w-full"
+              className="bg-orange-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
               onClick={() => clearData()}>
               Clear data
             </button>

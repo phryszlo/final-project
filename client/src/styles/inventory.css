@@ -7,14 +7,14 @@ main {
 }
 
 .equipment-form {
-  /* margin-top: 13em !important; */
-  /* width: 100vw; */
-  /* height: fit-content; */
-  /* width: fit-content; */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2em;
+}
+.eq-table-component{
+  height: fit-content !important;
+  min-height: 100vh !important;
 }
 .model-span {
   padding-left: 1em !important;

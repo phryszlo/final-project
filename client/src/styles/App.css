@@ -59,7 +59,7 @@ code {
 /* media query to enable animation for only those who want it */
 @media (prefers-reduced-motion: no-preference) {
   .marquee{
-      animation: marquee 4s linear infinite;
+      animation: marquee 8s linear infinite;
       margin: 0 !important;
   }
 }
@@ -72,12 +72,18 @@ code {
   min-height: 100vh;
   background-color: #212121;
   color: whitesmoke;
-  border: solid #900f19;
+  /* border: solid #900f19; */
+}
+
+.content-wrapper {
+  height: fit-content !important;
+  min-height: 100vh !important;
 }
 
 .content-div {
   /* border: solid salmon; */
-  height: 100vh;
+  height: fit-content !important;
+  min-height: 100vh !important;
 
 }
 

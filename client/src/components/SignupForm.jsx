@@ -2,7 +2,6 @@ import formImage from "../images/hester.jpg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion as m } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Button, Checkbox, Form } from 'semantic-ui-react'
@@ -18,11 +17,11 @@ export default function SignupForm({ setUser }) {
 
   const formik = useFormik({
     initialValues: {
-      name: "daren ",
-      email: "daren@gmail.com",
-      country: "Germany",
-      password: "123",
-      terms: ["checked"]
+      name: " ",
+      email: "",
+      country: "Mali",
+      password: "",
+      // terms: ["checked"]
     },
 
     validationSchema: Yup.object({
@@ -70,7 +69,7 @@ export default function SignupForm({ setUser }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 2 }}
+      transition={{ duration: 1 }}
       className="signup-form-outer">
       <main className="main signup-main">
         <Form onSubmit={formik.handleSubmit} className="form signup-form">
@@ -145,8 +144,10 @@ export default function SignupForm({ setUser }) {
                   onChange={formik.handleChange}
                 >
                   <option>United States</option>
-                  <option>United Kingdom</option>
+                  <option>Belgium</option>
                   <option selected="selected">Germany</option>
+                  <option>Mali</option>
+                  <option>Paraguay</option>
                 </select>
               </Form.Field>
 
@@ -169,14 +170,21 @@ export default function SignupForm({ setUser }) {
                     className="chk"
                   />
                   <p className="terms-text">
-                    I agree to the Terms and Service that my data will be taken
-                    and sold.
+                    I agree to the harvest and sale of my data.
                   </p>
                 </div>
               </Form.Field>
               <p className="error-message  text-sm text-red-600" onChange={() => this.logMsg(error)} >{error}</p>
               <Form.Field className="button-field">
-                <Button type="submit" className="submit-btn">Sign me up</Button>
+                <Button type="submit" className="submit-btn  !p-2 !mt-2 ">Sign me up</Button>
+              </Form.Field>
+              <Form.Field className="button-field login-signup-toggle justify-self-center place-self-center">
+                <button
+                  type="button"
+                  className="login-signup-toggle-btn submit-btn !bg-green-300 !p-2 !mt-2 rounded-lg"
+                  onClick={() => navigate('/')}>
+                  Already a user? Login here
+                </button>
               </Form.Field>
             </div>
           </div>

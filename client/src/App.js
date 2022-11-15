@@ -51,7 +51,7 @@ function App() {
       {user
         ?
         (
-          <div className="!flex !flex-col">
+          <div className="content-wrapper !flex !flex-col">
             <div className="nav-div">
               <NavBar username={user.name} setUser={setUser} rightItems={rightItems} Media={Media} />
             </div>

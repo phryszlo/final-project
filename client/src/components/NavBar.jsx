@@ -29,9 +29,9 @@ function NavBar({ username, setUser }) {
 
         <Menu.Item as="a" content="Home" key="home-link" onClick={() => navigate('/main')} />
         <Menu.Item as="a" content="NASA" key="nasa-link" onClick={() => navigate('/nasa')} />
-        <Menu.Item as="a" content="XL" key="xl-link1" onClick={() => navigate('/xl')} />
-        <Menu.Item as="a" content="Eq Form" key="xl-link2" onClick={() => navigate('/equipment')} />
-        <Menu.Item as="a" content="Eq Table" key="xl-link3" onClick={() => navigate('/equipment/all')} />
+        <Menu.Item as="a" content="xlsx import" key="xl-link1" onClick={() => navigate('/xl')} />
+        <Menu.Item as="a" content="Add Eq" key="xl-link2" onClick={() => navigate('/equipment')} />
+        <Menu.Item as="a" content="View Eq" key="xl-link3" onClick={() => navigate('/equipment/all')} />
 
         <Menu.Menu position="right">
         <Menu.Item as="a" content="Logoff" key="home-link" onClick={() => {

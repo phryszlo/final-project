@@ -6,6 +6,10 @@ export const getModels = async () => {
   const models = await inventoryAPI.getModels();
   return models;
 }
+export const getLocations = async () => {
+  const locs = await inventoryAPI.getLocations();
+  return locs;
+}
 export const getEq = async (id) => {
   const eq = await inventoryAPI.getEq(id);
   console.log(`inv svc getEq(id): eq=${JSON.stringify(eq)}`)
