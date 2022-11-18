@@ -4,18 +4,10 @@ const BASE_URL = process.env.NODE_ENV === 'production'
   : "/api/v1";
 
 
-
-export async function getModels() {
-  return sendRequest(`${BASE_URL}/models`, 'GET');
-}
-
-export async function getLocations() {
-  return sendRequest(`${BASE_URL}/locations`, 'GET');
-}
-
-export async function getEq(id) {
-  console.log(`getEq: id = ${id}`)
-  const thing =  sendRequest(`${BASE_URL}/equipment/${id}`, 'GET');
+// Equipment 
+  export async function getEq(id) {
+    console.log(`getEq: id = ${id}`)
+    const thing =  sendRequest(`${BASE_URL}/equipment/${id}`, 'GET');
   console.log(`thing = ${JSON.stringify(thing)}`);
   return thing;
 }
@@ -39,6 +31,42 @@ export async function postEq(newEq) {
   return sendRequest(`${BASE_URL}/equipment`, 'POST', newEq)
 }
 
+// Models
+export async function getModels() {
+  return sendRequest(`${BASE_URL}/models`, 'GET');
+}
+
+export async function getModel(id) {
+  return sendRequest(`${BASE_URL}/model/${id}`, 'GET');
+}
+export async function patchModel(id, updated) {
+  console.log(`updated: ${JSON.stringify(updated)}`);
+  return sendRequest(`${BASE_URL}/models/${id}`, 'PATCH', updated)
+}
+
+export async function postModel(newModel) {
+  console.log(`newModel: ${JSON.stringify(newModel)}`);
+  return sendRequest(`${BASE_URL}/models`, 'POST', newModel)
+}
+
+// Locations
+export async function getLocations() {
+  return sendRequest(`${BASE_URL}/locations`, 'GET');
+}
+
+export async function getLocation(id) {
+  return sendRequest(`${BASE_URL}/location/${id}`, 'GET');
+}
+export async function patchLocation(id, updated) {
+  console.log(`updated: ${JSON.stringify(updated)}`);
+  return sendRequest(`${BASE_URL}/locations/${id}`, 'PATCH', updated)
+}
+
+export async function postLocation(newLocation) {
+  console.log(`newLocation: ${JSON.stringify(newLocation)}`);
+  return sendRequest(`${BASE_URL}/locations`, 'POST', newLocation)
+}
+
 async function sendRequest(url, method = 'GET', payload = null) {
   console.log(`sendRequest payload: ${JSON.stringify(payload)}`)
 
@@ -49,10 +77,8 @@ async function sendRequest(url, method = 'GET', payload = null) {
   }
   const token = getToken(); //users-service gets token from localStorage
   if (token) {
-    // Ensure the headers object exists
     options.headers = options.headers || {};
     // Add token to an Authorization header
-    // Prefacing with 'Bearer' is recommended in the HTTP specification
     options.headers.Authorization = `Bearer ${token}`;
   }
 

@@ -57,7 +57,7 @@ export default function LoginForm({ setUser }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
       className="login-form-outer">
-      <main className="main login-main">
+      <main className="main login-main justify-start !mt-20 h-fit">
         <Form onSubmit={formik.handleSubmit} className="form login-form">
           <div className="form-body">
             <h1 className="text-3xl pb-2 font-burtons">

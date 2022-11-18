@@ -69,9 +69,12 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 120vh !important;
+  min-width: 100vw;
   background-color: #212121;
   color: whitesmoke;
+  margin: 0 !important;
+  padding: 0 !important;
   /* border: solid #900f19; */
 }
 
@@ -106,9 +109,8 @@ code {
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   /* width: 90vw; */
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #212121;
   color: whitesmoke;
   /* border: solid lime; */
@@ -132,7 +134,7 @@ code {
 
 @media screen and (max-width: 1200px) {
   .form {
-    height: 100vh;
+    /* height: 100vh; */
     width: 80vw;
   }
 }

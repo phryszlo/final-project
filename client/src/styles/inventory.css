@@ -3,14 +3,27 @@
 @tailwind utilities;
 
 main {
-  min-height: 100vh !important;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start; */
+  height: fit-content !important;
+  min-height: 200vh !important;
 }
 
 .equipment-form {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   padding: 2em;
+}
+
+.location-page-main {
+  margin-top: -2.2em !important;
+}
+
+.form-field, .error-field {
+  grid-template-columns: 1fr 2fr !important;
 }
 .eq-table-component{
   height: fit-content !important;

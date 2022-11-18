@@ -13,6 +13,8 @@ import { getUser } from './utilities/users-service'
 import XL from './components/XL';
 import EquipmentForm from './components/inventory/Equipment';
 import EqTable from './components/inventory/EqTable';
+import LocationPage from './components/inventory/LocationPage';
+import ModelForm from './components/inventory/ModelForm';
 
 
 
@@ -51,7 +53,7 @@ function App() {
       {user
         ?
         (
-          <div className="content-wrapper !flex !flex-col">
+          <div className="content-wrapper !flex !flex-col !w-screen bg-yellow-500">
             <div className="nav-div">
               <NavBar username={user.name} setUser={setUser} rightItems={rightItems} Media={Media} />
             </div>
@@ -68,6 +70,10 @@ function App() {
                 <Route path='/equipment' element={<EquipmentForm />} />
                 <Route path='/equipment/:id' element={<EquipmentForm />} />
                 <Route path='/equipment/all' element={<EqTable />} />
+                <Route path='/location/' element={<LocationPage />} />
+                <Route path='/location/:id' element={<LocationPage />} />
+                <Route path='/model/' element={<ModelForm />} />
+                <Route path='/model/:id' element={<ModelForm />} />
               </Routes>
             </div>
           </div>

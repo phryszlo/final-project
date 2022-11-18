@@ -17,7 +17,11 @@ const modelSchema = Schema({
   model_number: {
     type: String,
     required: false,
-  }
+  },
+  notes: {
+    type: String,
+    required: false,
+  },
 },
   {
     timestamps: true,

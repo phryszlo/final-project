@@ -1,12 +1,10 @@
-import React from 'react'
-
+import emma from '../images/emma.jpg';
 function Main() {
   return (
-    <div className="w-full h-1/2 text-amber-300">
-      {`Welcome to the final project app.
-        ` }
-        <div className="m-4 text-lime-500">
-          {`I think this page is only here so there would be more navbar items.`}
+    <div className=" w-1/2 !mx-auto h-1/2 text-amber-300">
+      <h2 className="text-lg font-burtons text-center">Where the hell is my stuff?</h2>
+        <div className="!mt-4 text-stone-300">
+          <img src={emma} alt="emma the dog" />
         </div>
     </div>
   )

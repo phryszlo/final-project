@@ -17,5 +17,4 @@ const ModelForm = (props) => {
     )
   };
 
-export default ModelForm
-  ;
+export default ModelForm;

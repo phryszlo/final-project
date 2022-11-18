@@ -71,7 +71,7 @@ export default function SignupForm({ setUser }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
       className="signup-form-outer">
-      <main className="main signup-main">
+      <main className="main signup-main justify-start !mt-20 h-fit">
         <Form onSubmit={formik.handleSubmit} className="form signup-form">
           <div className="form-body">
             <h1 className="text-3xl pb-2 font-burtons">

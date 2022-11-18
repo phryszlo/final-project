@@ -149,20 +149,21 @@ const EquipmentForm = () => {
     console.log(`clear data.`)
     setCurrEq(new Object());
     formik.resetForm();
-    
+
     // formik.setValues({ ...formik.initialValues });
   }
 
   return (
-    <main className="equipment-form-component w-screen absolute top-0 left-0 flex items-center justify-center px-5 bg-slate-700">
+    <main className="equipment-form-component !w-screen absolute top-0 
+                    left-0 flex flex-col justify-start items-center !mt-24 px-5 bg-slate-700">
       <form
         onSubmit={formik.handleSubmit}
-        className="equipment-form border-2 bg-stone-100 rounded-md h-fit w-2/3 p-3 font-latoRegular">
+        className="equipment-form border-2 bg-stone-100 rounded-md h-fit w-2/3 p-3 !mt-14">
         <div className="text-gray-700 p-20 self-center flex flex-col items-center justify-center w-5/6">
           <h1 className="text-3xl pb-2 font-burtons w-full text-center">
             equipment item
           </h1>
-
+          8
           {/* MODELS SECTION */}
           {/* models 'form' */}
           <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border !border-emerald-300">
@@ -290,13 +291,13 @@ const EquipmentForm = () => {
             type="text"
             name="model_id"
             className="!w-full text-center"
-            value={`model_id: ${formik.values.model_id}`}  />
+            value={`model_id: ${formik.values.model_id}`} />
           <input
             disabled
             type="text"
             name="id"
             className="!w-full text-center"
-            value={`eq_id: ${formik.values.id}`}  />
+            value={`eq_id: ${formik.values.id}`} />
           <input
             disabled
             type="text"
@@ -394,7 +395,10 @@ const EquipmentForm = () => {
               id="update-btn"
               type="submit"
               className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
-              onClick={() => setIsUpdate(true)}>
+              onClick={() => {
+                setIsUpdate(true);
+              }}
+            >
               Update
             </button>
             <button
