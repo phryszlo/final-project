@@ -1,14 +1,17 @@
-import { useEffect } from 'react';
-import { LocationsContextProvider } from '../../state/LocationsContext';
+import { useEffect, useContext } from 'react';
+import {LocationsContext} from '../../state/LocationsContext';
 
-function LocationTable({ setLocation, allLocations, setAllLocations }) {
+function LocationTable() {
+
+  const {location, locations} = useContext(LocationsContext);
+  const [currLoc, setCurrLoc] = location;
+  const [locs, setLocs] = locations;
 
   useEffect(() => {
-    console.log(`allLocations: ${JSON.stringify(allLocations)}`);
+    console.log(`locations: ${JSON.stringify(locs)}`);
   }, []);
-  
+
   return (
-    <LocationsContextProvider>
       <div className="eq-table-component flex justify-center">
         <table className="eq-table w-4/5 h-full bg-slate-800  border border-slate-100">
           <thead>
@@ -20,7 +23,7 @@ function LocationTable({ setLocation, allLocations, setAllLocations }) {
             </tr>
           </thead>
           <tbody>
-            {allLocations && allLocations.length > 0 && allLocations.map((v, i) => {
+            {locs && locs.length > 0 && locs.map((v, i) => {
               return (
                 <tr key={i}>
                   <td className="border-b border-blue-300 !px-4 !py-1" key={`td0-${i}`}>
@@ -29,7 +32,7 @@ function LocationTable({ setLocation, allLocations, setAllLocations }) {
                       type="button"
                       onClick={() => {
                         console.log(`click: ${JSON.stringify(v)}`);
-                        setLocation(v);
+                        setCurrLoc(v);
                       }}
                     >
                       view
@@ -50,7 +53,6 @@ function LocationTable({ setLocation, allLocations, setAllLocations }) {
           </tbody>
         </table>
       </div>
-    </LocationsContextProvider>
   )
 }
 

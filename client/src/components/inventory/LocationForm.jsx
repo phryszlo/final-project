@@ -1,18 +1,21 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getLocation, insertLocation, updateLocation } from "../../utilities/inventory-service";
+import { LocationsContext } from "../../state/LocationsContext";
 
-const LocationForm = ({ location }) => {
+const LocationForm = () => {
 
-  const [currLoc, setCurrLoc] = useState(location ? location : {boo: "yah"});
+  const {location} = useContext(LocationsContext);
+  const [currLoc, _] = location;
+
   const [isUpdate, setIsUpdate] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(`locform euf: ${JSON.stringify(location)}`)
-  }, [location]);
+  // useEffect(() => {
+  //   console.log(`locform euf: ${JSON.stringify(currLoc)}`)
+  // }, [currLoc]);
 
   // this is a hack. the data was not displaying on first load, though it was there.
   // i don't know why this even works. without the call to setFormikVals in the useEffect[],
@@ -72,9 +75,9 @@ const LocationForm = ({ location }) => {
   })
 
   return (
-    <main className="location-form-shell flex border-x-orange-300">
+    <main className="currLoc-form-shell flex border-x-orange-300">
       <form className="flex flex-col items-center">
-        <div className="location-form-inner items-center !p-3 rounded-lg h-fit h-min-1/2 text-stone-200 bg-stone-700">
+        <div className="currLoc-form-inner items-center !p-3 rounded-lg h-fit h-min-1/2 text-stone-200 bg-stone-700">
           <div className="form-field grid grid-cols-2 !mt-3">
             <label
               htmlFor="building"
@@ -85,7 +88,7 @@ const LocationForm = ({ location }) => {
               type="text"
               name="building"
               placeholder="building"
-              className="txt-building !p-1 rounded-md"
+              className="txt-building !p-1 rounded-md text-stone-900"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.building} />
@@ -111,7 +114,7 @@ const LocationForm = ({ location }) => {
               type="text"
               name="room"
               placeholder="room"
-              className="txt-room !p-1 rounded-md"
+              className="txt-room !p-1 rounded-md text-stone-900"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.room} />
@@ -134,7 +137,7 @@ const LocationForm = ({ location }) => {
             </label>
             <textarea
               name="notes"
-              className="txt-notes !p-1 rounded-md"
+              className="txt-notes !p-1 rounded-md text-stone-900"
               placeholder="notes"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -149,8 +152,8 @@ const LocationForm = ({ location }) => {
           </div>
 
         </div> {/* end of form-inner */}
-        <div className="location-form-lower">
-          <button className="location-add-btn !py-1 !px-3 bg-orange-600 rounded-lg !mt-2">{isUpdate ? 'Update' : 'Add'}</button>
+        <div className="currLoc-form-lower">
+          <button className="currLoc-add-btn !py-1 !px-3 bg-orange-600 rounded-lg !mt-2">{isUpdate ? 'Update' : 'Add'}</button>
         </div>
       </form>
     </main>

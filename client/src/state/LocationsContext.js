@@ -1,32 +1,18 @@
-import { useState, createContext, useReducer } from 'react';
+import { useState, createContext } from 'react';
 
-// const useStore = () => {
-//   const [thing, setThing] = useState('');
-//   const [place, setPlace] = useState('');
-//   const [quantity, setQuantity] = useState(0);
+export const LocationsContext = createContext();
 
-//   return {
-//     thing, place, quantity,
-//     addThing: () => setThing('sharpie'),
-//     addPlace: () => setPlace('office'),
-//     setQ: () => setQuantity(1)
-//   }
-// }
-// const locsReducer = (state, action) => {
-//   switch (action.type) {
-//     case "FOO":
-//       return (state = "Swiss");
-//     case "BAR":
-//       return (state = "Mozzarella");
-//     default:
-//       return state;
-//   }
-// }
-const [locations, setLocations] = useState({});
+export const LocationsProvider = ({ children }) => {
+  const [locations, setLocations] = useState([{}]);
+  const [location, setLocation] = useState({});
 
-const LocationsContext = createContext({});
-export const LocationsContextProvider = ({ children }) => {
-  <LocationsContext.Provider value={({ locations, setLocations })}>
-    {children}
-  </LocationsContext.Provider>
+  return (
+    <LocationsContext.Provider value={{
+      locations: [locations, setLocations],
+      location: [location, setLocation]
+    }}
+    >
+      {children}
+    </LocationsContext.Provider >
+  );
 }
