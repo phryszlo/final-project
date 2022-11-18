@@ -20,22 +20,13 @@ const app = express();
 const PORT = process.env.PORT || 7952;
 
 app.use(cors({
-  origin: "https://final-client.onrender.com/"
-  //  [
-  //   "http://74.215.63.91:3000",
-  //   "http://localhost:3000",
-  //   "http://0.0.0.0:3000",
-  //   "https://final-client.onrender.com/"
-  // ]
-}));
-
-app.use(cors({
   origin: [
     'http://localhost:3000',
+    'final-client.onrender.com',
     'http://final-client.onrender.com',
-    'https://final-server.onrender.com'],
+    'https://final-client.onrender.com'],
   credentials: true
-}))
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
