@@ -18,8 +18,8 @@ main {
   padding: 2em;
 }
 
-.location-page-main {
-  margin-top: -2.2em !important;
+.location-page-main, .model-page-main {
+  margin-top: -3em !important;
 }
 
 .form-field, .error-field {

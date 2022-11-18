@@ -1,17 +1,36 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getLocation, insertLocation, updateLocation } from "../../utilities/inventory-service";
 import { LocationsContext } from "../../state/LocationsContext";
 
 const LocationForm = () => {
 
-  const {location} = useContext(LocationsContext);
-  const [currLoc, _] = location;
+  const { location } = useContext(LocationsContext);
+  const [currLoc, setCurrLoc] = location;
 
   const [isUpdate, setIsUpdate] = useState(false);
   const navigate = useNavigate();
+  const paramsId = useParams();
+
+
+  useEffect(() => {
+    const callGetLocation = async () => {
+      try {
+        const eq = await getLocation(paramsId.id);
+        setCurrLoc(eq);
+      } catch (error) {
+        console.log(`callGetLoc err: ${error}`)
+      }
+    }
+
+    // get a location for the form only if there is an id param.
+    if (Object.keys(paramsId).length > 0) {
+      console.log(`paramsId: ${JSON.stringify(paramsId)}`);
+      callGetLocation();
+    }
+  }, []);
 
   // useEffect(() => {
   //   console.log(`locform euf: ${JSON.stringify(currLoc)}`)
@@ -153,7 +172,14 @@ const LocationForm = () => {
 
         </div> {/* end of form-inner */}
         <div className="currLoc-form-lower">
-          <button className="currLoc-add-btn !py-1 !px-3 bg-orange-600 rounded-lg !mt-2">{isUpdate ? 'Update' : 'Add'}</button>
+          <button
+            className="currLoc-add-btn !py-1 !px-3 bg-orange-600 rounded-lg !mt-2"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            {isUpdate ? 'Update' : 'Add'}
+          </button>
         </div>
       </form>
     </main>

@@ -55,7 +55,7 @@ export async function getLocations() {
 }
 
 export async function getLocation(id) {
-  return sendRequest(`${BASE_URL}/location/${id}`, 'GET');
+  return sendRequest(`${BASE_URL}/locations/${id}`, 'GET');
 }
 export async function patchLocation(id, updated) {
   console.log(`updated: ${JSON.stringify(updated)}`);

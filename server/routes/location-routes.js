@@ -1,14 +1,27 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Locations = require('../models/location-model.js');
 
 router.get('/', async (req, res) => {
   try {
-    const theEquipment = await Locations.find({});
-    console.log(`${theEquipment.length} locations returned. 📬`);
-    res.json({ locations: theEquipment })
+    const theLocations = await Locations.find({});
+    console.log(`${theLocations.length} locations returned. 📬`);
+    res.json({ locations: theLocations })
   } catch (error) {
     console.log(`locations get all error: ${error}`);
+  }
+})
+
+// get one location by id
+router.get('/:id', async (req, res) => {
+  try {
+    console.log(`locit = ${req.params.id}`);
+    const theLocation = await Locations.findById({ _id: mongoose.Types.ObjectId(req.params.id) }, "-__v -createdAt -updatedAt");
+    console.log(`the location: ${JSON.stringify(theLocation)}📬`);
+    return res.json(theLocation)
+  } catch (error) {
+    console.log(`location get one error: ${error}`);
   }
 })
 

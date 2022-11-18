@@ -12,23 +12,9 @@ function LocationPage() {
   const [currLoc, setCurrLoc] = location;
   const [locs, setLocs] = locations;
 
-  const paramsId = useParams();
 
   useEffect(() => {
-    const callGetLocation = async () => {
-      try {
-        const eq = await getLocation(paramsId.id);
-        setCurrLoc(eq);
-      } catch (error) {
-        console.log(`callGetLoc err: ${error}`)
-      }
-    }
 
-    // get a location for the form only if there is an id param.
-    if (Object.keys(paramsId).length > 0) {
-      console.log(`paramsId: ${JSON.stringify(paramsId)}`);
-      callGetLocation();
-    }
 
     const callGetLocations = async () => {
       try {
@@ -47,7 +33,7 @@ function LocationPage() {
   }, [location]);
 
   return (
-    <main className="location-page-main flex flex-col w-screen min-w-max justify-start items-center !pt-5 border">
+    <main className="location-page-main flex flex-col w-screen min-w-max justify-start items-center !pt-5 ">
       <h2 className="font-burtons text-lg !mb-2 text-teal-600">Locations Page</h2>
       <div className="flex">
         <LocationTable />

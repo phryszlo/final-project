@@ -1,17 +1,17 @@
 import { useEffect, useContext } from 'react';
-import {LocationsContext} from '../../state/LocationsContext';
+import {ModelsContext} from '../../state/ModelsContext';
 import { useNavigate} from 'react-router-dom';
 
-function LocationTable() {
+function ModelsTable() {
 
-  const {location, locations} = useContext(LocationsContext);
-  const [currLoc, setCurrLoc] = location;
-  const [locs, setLocs] = locations;
+  const {model, models} = useContext(ModelsContext);
+  const [currMod, setCurrMod] = model;
+  const [mods, setMods] = models;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(`locations: ${JSON.stringify(locs)}`);
+    console.log(`models: ${JSON.stringify(mods)}`);
   }, []);
 
   return (
@@ -20,13 +20,13 @@ function LocationTable() {
           <thead>
             <tr className="bg-amber-600">
               <th className="text-left text-slate-900 border-b border-blue-300 !px-4 !py-1"></th>
-              <th className="text-left text-slate-900 border-b border-blue-300 !px-4 !py-1">Building</th>
-              <th className="text-left text-slate-900 border-b border-blue-300 !px-4 !py-1">Location</th>
+              <th className="text-left text-slate-900 border-b border-blue-300 !px-4 !py-1">Make</th>
+              <th className="text-left text-slate-900 border-b border-blue-300 !px-4 !py-1">Model name</th>
               {/* <th className="text-left text-slate-900 border-b border-blue-300 !px-4 !py-1">Notes</th> */}
             </tr>
           </thead>
           <tbody>
-            {locs && locs.length > 0 && locs.map((v, i) => {
+            {mods && mods.length > 0 && mods.map((v, i) => {
               return (
                 <tr key={i}>
                   <td className="border-b border-blue-300 !px-4 !py-1" key={`td0-${i}`}>
@@ -35,16 +35,16 @@ function LocationTable() {
                       type="button"
                       onClick={() => {
                         console.log(`click: ${JSON.stringify(v)}`);
-                        setCurrLoc(v);
-                        navigate(`/location/${v.id}`)
+                        setCurrMod(v);
+                        navigate(`/model/${v.id}`)
                       }}
                     >
                       view
                     </button>
 
                   </td>
-                  <td className="border-b border-blue-300 !px-4 !py-1" key={`loc-td1-${i}`}>{v.building && v.building}</td>
-                  <td className="border-b border-blue-300 !px-4 !py-1" key={`loc-td2-${i}`}>{v.room && v.room}</td>
+                  <td className="border-b border-blue-300 !px-4 !py-1" key={`loc-td1-${i}`}>{v.make && v.make}</td>
+                  <td className="border-b border-blue-300 !px-4 !py-1" key={`loc-td2-${i}`}>{v.model_name && v.model_name}</td>
                   {/* <td
                   className="border-b border-blue-300 !px-4 !py-1 whitespace-normal max-w-lg"
                   key={`loc-td3-${i}`}>
@@ -60,4 +60,4 @@ function LocationTable() {
   )
 }
 
-export default LocationTable;
+export default ModelsTable;
