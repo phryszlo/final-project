@@ -19,13 +19,14 @@ const app = express();
 
 const PORT = process.env.PORT || 7952;
 
-// app.use(cors({
-//   origin: [
-//     "http://74.215.63.91:3000",
-//     "http://localhost:3000",
-//     "http://0.0.0.0:3000"
-//   ]
-// }));
+app.use(cors({
+  origin: [
+    "http://74.215.63.91:3000",
+    "http://localhost:3000",
+    "http://0.0.0.0:3000",
+    "https://final-client.onrender.com/"
+  ]
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
