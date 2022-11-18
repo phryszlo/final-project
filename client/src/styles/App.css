@@ -149,6 +149,9 @@ code {
   /* border: solid orange; */
 }
 
+.main-shell {
+  margin-top: -3rem !important;
+}
 /* object-cover h-full object-left-top rounded-lg */
 .form-img-wrap {
   /* display: flex; */

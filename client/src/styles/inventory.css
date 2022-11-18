@@ -18,6 +18,19 @@ main {
   padding: 2em;
 }
 
+.model-form-shell {
+  width: max-content !important;
+  min-width: 400px !important;
+}
+.model-form {
+  width: max-content !important;
+  min-width: 360px !important;
+}
+.model-form-inner {
+  width: max-content !important;
+  min-width: 360px !important;
+}
+
 .location-page-main, .model-page-main {
   margin-top: -3em !important;
 }

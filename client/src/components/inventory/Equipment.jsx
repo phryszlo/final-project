@@ -155,34 +155,35 @@ const EquipmentForm = () => {
 
   return (
     <main className="equipment-form-component !w-screen absolute top-0 
-                    left-0 flex flex-col justify-start items-center !mt-24 px-5 bg-slate-700">
+                    left-0 flex flex-col justify-start items-center !mt-24 px-5 ">
       <form
         onSubmit={formik.handleSubmit}
-        className="equipment-form border-2 bg-stone-100 rounded-md h-fit w-2/3 p-3 !mt-14">
-        <div className="text-gray-700 p-20 self-center flex flex-col items-center justify-center w-5/6">
-          <h1 className="text-3xl pb-2 font-burtons w-full text-center">
-            equipment item
+        className="equipment-form border-2 text-stone-200 bg-slate-800 rounded-xl h-fit w-2/3 p-3 !mt-14">
+        <div className="p-20 self-center flex flex-col items-center justify-center w-5/6">
+          <h1 className="text-3xl !p-2 font-burtons w-full text-center">
+            inventory item
           </h1>
-          8
+
           {/* MODELS SECTION */}
           {/* models 'form' */}
-          <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border !border-emerald-300">
+          <div className="flex self-start justify-around items-center text-sm !w-2/3 !h-full !m-1 border border-slate-600 bg-slate-800 text-stone-100 rounded-lg">
             <button
               type="button"
-              className="bg-teal-500 w-20 rounded-md mr-8 hover:bg-red-400 active:bg-green-300"
+              className="border border-slate-600 text-sm !p-2 w-20 h-16 
+                        rounded-md !m-2 hover:bg-orange-500 active:bg-green-300"
               onClick={() => {
                 setShowModelSelect(!showModelSelect);
               }}>
-              {showModelSelect ? 'close model select' : 'choose model'}
+              {showModelSelect ? 'close' : 'choose model'}
             </button>
-            <div className="flex flex-col items-center w-full">
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
+            <div className="flex flex-col items-center w-full text-teal-500">
+              <span className="model-span block w-4/5 text-left border-b-slate-600 border-b px-5 mb-2 border-slate-900  h-fit min-h-8">
                 {formik.values.eq_type}
               </span>
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
+              <span className="model-span block w-4/5 text-left border-b-slate-600 border-b px-5 mb-2 border-slate-900  h-fit min-h-8">
                 {formik.values.make}
               </span>
-              <span className="model-span block w-4/5 !h-fit text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900">
+              <span className="model-span block whitespace-normal w-4/5 text-left border-b-slate-600 border-b px-5 mb-2 border-slate-900 h-fit min-h-8">
                 {formik.values.model_name}
               </span>
             </div>
@@ -230,20 +231,22 @@ const EquipmentForm = () => {
 
           {/* LOCATIONS SECTION */}
           {/* locations 'form' */}
-          <div className="flex justify-around !bg-orange-200 !w-full !h-full !m-1 border !border-emerald-300">
+          <div className="flex self-start justify-around items-center text-sm  !w-2/3 !h-full 
+                  !m-1 !mb-4 border border-slate-600 text-stone-100 rounded-lg">
             <button
               type="button"
-              className="bg-teal-500 w-20 rounded-md mr-8 hover:bg-red-400 active:bg-green-300"
+              className="border border-slate-600 text-sm !p-2 w-20 h-16 
+                        rounded-md !m-2 hover:bg-orange-500 active:bg-green-300"
               onClick={() => {
                 setShowLocationSelect(!showLocationSelect);
               }}>
-              {showLocationSelect ? 'close location select' : 'choose location'}
+              {showLocationSelect ? 'close' : 'choose location'}
             </button>
-            <div className="flex flex-col items-center w-full">
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
+            <div className="flex flex-col items-center w-full text-teal-500">
+              <span className="model-span block w-4/5 text-sm text-left border-b-slate-600 border-b px-5 mb-2 border-slate-900  h-fit min-h-8">
                 {formik.values.building}
               </span>
-              <span className="model-span block w-4/5 text-left border-b-purple-400 border-b px-5 mb-2 border-slate-900 h-8">
+              <span className="model-span block w-4/5 text-sm text-left border-b-slate-600 border-b px-5 mb-2 border-slate-900  h-fit min-h-8">
                 {formik.values.room}
               </span>
             </div>
@@ -286,37 +289,39 @@ const EquipmentForm = () => {
           </div>
 
           {/* DISPLAY IDS SECTION */}
-          <input
-            disabled
-            type="text"
-            name="model_id"
-            className="!w-full text-center"
-            value={`model_id: ${formik.values.model_id}`} />
-          <input
-            disabled
-            type="text"
-            name="id"
-            className="!w-full text-center"
-            value={`eq_id: ${formik.values.id}`} />
-          <input
-            disabled
-            type="text"
-            name="location_id"
-            className="!w-full text-center"
-            value={`loc_id: ${formik.values.location_id}`} />
+          <div className="hidden">
+            <input
+              disabled
+              type="text"
+              name="model_id"
+              className="!w-full text-center"
+              value={`model_id: ${formik.values.model_id}`} />
+            <input
+              disabled
+              type="text"
+              name="id"
+              className="!w-full text-center"
+              value={`eq_id: ${formik.values.id}`} />
+            <input
+              disabled
+              type="text"
+              name="location_id"
+              className="!w-full text-center"
+              value={`loc_id: ${formik.values.location_id}`} />
+          </div>
           <div className="mt-6 w-full">
 
             <div className="pb-4">
               <label
                 htmlFor="serial_number"
                 className={`block font-latoBold text-sm pb-1 ${formik.touched.serial_number && formik.errors.serial_number
-                  ? 'text-red-500'
+                  ? 'text-blue-500'
                   : ''}`}
               >
                 {formik.touched.serial_number && formik.errors.serial_number ? formik.errors.serial_number : "serial_number"}
               </label>
               <input
-                className="bg-stone-50 border-2 px-2 py-1 border-gray-500 rounded-md w-full !focus:border-teal-500 !focus:ring-teal-500"
+                className="bg-stone-100 text-stone-900 border-2 !px-1.5 !py-1 border-gray-500 rounded-md w-full !focus:border-teal-500 !focus:ring-teal-500"
                 type="text"
                 name="serial_number"
                 placeholder="Serial number"
@@ -328,14 +333,14 @@ const EquipmentForm = () => {
               <label
                 htmlFor="id_tag"
                 className={`block font-latoBold text-sm pb-1 ${formik.touched.id_tag && formik.errors.id_tag
-                  ? 'text-red-500'
+                  ? 'text-blue-500'
                   : ''}`}>
                 {formik.touched.id_tag && formik.errors.id_tag
                   ? formik.errors.id_tag
                   : "id_tag"}
               </label>
               <input
-                className="bg-stone-50 border-2 border-gray-500 px-2 py-1 rounded-md w-full focus:border-orange-500 focus:ring-orange-500"
+                className="bg-stone-100 text-stone-900 border-2 border-gray-500 !px-1.5 !py-1 rounded-md w-full focus:border-orange-500 focus:ring-orange-500"
                 type="text"
                 name="id_tag"
                 placeholder="ID tag"
@@ -347,7 +352,7 @@ const EquipmentForm = () => {
               <label className="block font-latoBold text-sm pb-1" htmlFor="status">status</label>
               {/* "Active","Inactive","Out of service", "Lost", "In use", "Dan took it" */}
               <select
-                className="bg-stone-50 border-2 red border-gray-500 p-1.5 rounded-md w-full focus:border-teal-500 focus:ring-teal-500"
+                className="bg-stone-100 text-stone-900 border-2 red border-gray-500 !px-1.5 !py-1 rounded-md w-full focus:border-teal-500 focus:ring-teal-500"
                 name="status"
                 value={formik.values.status}
                 onChange={formik.handleChange}
@@ -363,14 +368,14 @@ const EquipmentForm = () => {
               <label
                 htmlFor="notes"
                 className={`block font-latoBold text-sm pb-1 ${formik.touched.notes && formik.errors.notes
-                  ? 'text-red-500'
+                  ? 'text-blue-500'
                   : ''}`}>
                 {formik.touched.notes && formik.errors.notes
                   ? formik.errors.notes
                   : "notes"}
               </label>
               <textarea
-                className="bg-stone-50 border-2 border-gray-500 px-2 py-1 rounded-md w-full focus:border-orange-500 focus:ring-orange-500"
+                className="bg-stone-50 border-2 border-gray-500 !px-1.5 !py-1 rounded-md w-full text-stone-900"
                 name="notes"
                 placeholder="notes"
                 value={formik.values.notes}
@@ -378,36 +383,38 @@ const EquipmentForm = () => {
                 onBlur={formik.handleBlur} />
             </div>
 
-
             <label htmlFor="insert-btn" className="block font-latoBold text-sm pb-1 text-blue-500 w-full text-center">
               {formik.errors.model_id ? formik.errors.model_id : ""}
             </label>
-            <button
-              disabled={Object.keys(formik.errors).length > 0}
-              id="insert-btn"
-              type="submit"
-              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
-              onClick={() => setIsUpdate(false)}>
-              Insert
-            </button>
-            <button
-              disabled={Object.keys(formik.errors).length > 0}
-              id="update-btn"
-              type="submit"
-              className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
-              onClick={() => {
-                setIsUpdate(true);
-              }}
-            >
-              Update
-            </button>
-            <button
-              id="clear-btn"
-              type="button"
-              className="bg-orange-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-full"
-              onClick={() => clearData()}>
-              Clear data
-            </button>
+
+            <div className="btn-div grid grid-cols-3 !my-2 !mx-auto !w-full">
+              <button
+                disabled={Object.keys(formik.errors).length > 0}
+                id="insert-btn"
+                type="submit"
+                className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-3/4 text-center"
+                onClick={() => setIsUpdate(false)}>
+                Insert
+              </button>
+              <button
+                disabled={Object.keys(formik.errors).length > 0}
+                id="update-btn"
+                type="submit"
+                className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-3/4"
+                onClick={() => {
+                  setIsUpdate(true);
+                }}
+              >
+                Update
+              </button>
+              <button
+                id="clear-btn"
+                type="button"
+                className="bg-teal-500 font-latoBold text-sm text-white py-3 mt-6 rounded-md w-3/4"
+                onClick={() => clearData()}>
+                Clear data
+              </button>
+            </div>
           </div>
         </div>
 

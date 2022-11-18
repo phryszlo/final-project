@@ -94,9 +94,9 @@ const ModelForm = () => {
   })
 
   return (
-    <main className="currLoc-form-shell flex !sticky !top-20">
-      <form className="flex flex-col items-center">
-        <div className="currLoc-form-inner items-center !p-3 rounded-lg h-fit h-min-1/2 text-stone-200 bg-stone-700">
+    <main className="model-form-shell flex !sticky !top-20 w-fit">
+      <form className="model-form flex flex-col items-center">
+        <div className="model-form-inner text-sm items-center !p-3 rounded-lg h-fit h-min-1/2 text-stone-200 bg-stone-700">
           <div className="form-field grid grid-cols-2 !mt-3">
             <label
               htmlFor="make"
@@ -107,7 +107,7 @@ const ModelForm = () => {
               type="text"
               name="make"
               placeholder="make"
-              className="txt-make !p-1 !ml-2 rounded-md text-stone-900"
+              className="txt-make !p-1 !ml-2  w-fit min-w-full rounded-md text-stone-900"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.make} />
@@ -133,7 +133,7 @@ const ModelForm = () => {
               type="text"
               name="model_name"
               placeholder="model_name"
-              className="txt-model_name !p-1 !ml-2 rounded-md text-stone-900"
+              className="txt-model_name !p-1 !ml-2 w-fit !break-words min-w-full rounded-md text-stone-900"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.model_name} />
@@ -149,10 +149,10 @@ const ModelForm = () => {
               type="text"
               name="model_number"
               placeholder="model_number"
-              className="txt-model_number !p-1 !ml-2 rounded-md text-stone-900"
+              className="txt-model_number !p-1 !ml-2 w-fit min-w-full rounded-md text-stone-900"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.model_name} />
+              value={formik.values.model_number} />
           </div>
 
           <div className="error-field grid  !m-0">
@@ -172,7 +172,7 @@ const ModelForm = () => {
             </label>
             <textarea
               name="notes"
-              className="txt-notes !p-1 !ml-2 rounded-md text-stone-900"
+              className="txt-notes !p-1 !ml-2 w-fit min-w-full rounded-md text-stone-900"
               placeholder="notes"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

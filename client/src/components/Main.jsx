@@ -1,8 +1,11 @@
 import emma from '../images/emma.jpg';
 function Main() {
   return (
-    <div className=" w-1/2 !mx-auto h-1/2 text-amber-300">
-      <h2 className="text-lg font-burtons text-center">Where the hell is my stuff?</h2>
+    <div className="main-shell w-1/2 !mx-auto h-1/2 text-amber-300">
+      <h1 className="text-xl font-burtons text-center text-blue-600">
+        Where is all my stuff?
+        </h1>
+      <h2 className="font-burtons text-lg text-center text-orange-500">An inventory app</h2>
         <div className="!mt-4 text-stone-300">
           <img src={emma} alt="emma the dog" />
         </div>
