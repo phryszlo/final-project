@@ -2,7 +2,7 @@ import * as usersAPI from "./users-api";
 
 export async function signUp(userData) {
 
-  console.log(`signUp hit ${JSON.stringify(userData)}`)
+  // console.log(`signUp hit ${JSON.stringify(userData)}`)
 
   const response = await usersAPI.signUp(userData);
   const data = response.data;
@@ -76,7 +76,7 @@ export function setGoogleData(userData, credential) {
 
 export async function logIn(userData) {
   try {
-    console.log(`userData`);
+    // console.log(`userData`);
     const data = await usersAPI.logIn(userData);
     if (data.unauthorized) return 401;
     const { password, id, _id, __v, createdAt, updatedAt, ...user } = data.data.user;
