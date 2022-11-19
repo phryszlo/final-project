@@ -1,7 +1,9 @@
 import { getToken } from './users-service';
-const BASE_URL = process.env.NODE_ENV === 'production'
-  ? process.env.REACT_APP_API_URL_RENDER + '/users'
-  : "/api/v1/users";
+// const BASE_URL = process.env.NODE_ENV === 'production'
+//   ? process.env.REACT_APP_API_URL_GCLOUD + '/users'
+//   : "/api/v1/users";
+
+const BASE_URL = process.env.REACT_APP_API_URL_GCLOUD + '/users';
 
 export async function signUp(userData) {
   return sendRequest(BASE_URL, 'POST', userData);
@@ -49,6 +51,7 @@ async function sendRequest(url, method = 'GET', payload = null) {
   else if (res.status === 401) {
     return res.json({ unauthorized: true });
   }
+  else return res.json({ status: res.status, msg: JSON.stringify(res)});
   throw new Error('Awful Request');
 }
 

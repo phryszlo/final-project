@@ -48,7 +48,7 @@ async function login(req, res) {
       console.log(`key = ${key}`)
     })
     console.log(`user b4 delete: ${JSON.stringify(user._doc)}`);
-    user.password && console.log(`user.password = ${user.password}`)
+    // user.password && console.log(`user.password = ${user.password}`)
 
     // delete like this doesn't error but doesn't work either
     // delete user.password
@@ -56,7 +56,7 @@ async function login(req, res) {
     // this actually works. mongoose apparently has a secret _doc key.
     user._doc && delete user._doc.password;
 
-    console.log(`users line 38, user= ${JSON.stringify(user)}`);
+    // console.log(`users line 38, user= ${JSON.stringify(user)}`);
     if (user === null) return res.status(401).json({ unauthorized: true })
     const token = createJWT(user);
     res.status(201).json({
@@ -68,7 +68,7 @@ async function login(req, res) {
     });
   } catch (error) {
     console.log(`login error: ${error}`)
-    res.status(400).json(error);
+    res.status(400).json({...error, isay: "line 71 of user-controller sends regards"});
   }
 }
 
@@ -78,7 +78,7 @@ function createJWT(user) {
   return jwt.sign(
     // data payload
     { user },
-    process.env.SECRET,
+    process.env.RTT_SECRET,
     { expiresIn: '24h' }
   );
 }

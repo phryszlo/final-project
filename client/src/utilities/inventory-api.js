@@ -1,7 +1,9 @@
 import { getToken } from './users-service';
-const BASE_URL = process.env.NODE_ENV === 'production'
-  ? process.env.REACT_APP_API_URL_RENDER
-  : "/api/v1";
+// const BASE_URL = process.env.NODE_ENV === 'production'
+//   ? process.env.REACT_APP_API_URL_GCLOUD
+//   : "/api/v1";
+
+const BASE_URL = process.env.REACT_APP_API_URL_GCLOUD;
 
 
 // Equipment 
